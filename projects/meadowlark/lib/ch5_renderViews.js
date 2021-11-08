@@ -22,13 +22,13 @@ exports.fortunes = (
 exports.notFound = ( 
     req, res 
   ) => {
-    res.status( 404 )
+    // res.status( 404 )
     res.render( '404' )
   }
 
 exports.errorFive = ( 
   err, req, res, next 
   ) => {
-    res.status( 500 )
+    // res.status( 500 )
     res.render( '500' )
   }
