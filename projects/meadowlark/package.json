@@ -4,7 +4,6 @@
   "description": "Meadowlark Website",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "test": "jest"
   },
   "keywords": [],
@@ -15,6 +14,8 @@
     "express-handlebars": "^5.3.3"
   },
   "devDependencies": {
-    "jest": "^27.3.1"
+    "jest": "^27.3.1",
+    "portfinder": "^1.0.28",
+    "puppeteer": "^11.0.0"
   }
 }
