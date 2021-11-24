@@ -33,14 +33,14 @@ app.post( '/form_data_robust', ( req, res ) => {
     )
     res.format({
       'text/html': () => res.redirect( 303, 'thank-you' ),
-      'application/json': () => res.status( 500 ).json({
+      'application/json': () => res.json({
         success: true
       })
     })
   }catch( err ){
     console.log( `Error processing this ${ req.body.name } ${ req.body.email }` );
     res.format({
-      'text/html': () => res.redirect( 303, 'thank-you' ),
+      'text/html': () => res.redirect( 303, 'contact-error' ),
       'application/json': () => res.status( 500 ).json({
         error: 'Error saving Content'
       })
