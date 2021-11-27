@@ -1,0 +1,59 @@
+<h2>Forms</h2>
+
+<form action="" method="post" id="formD">
+  <label for="nameUser">
+    <input type="text" placeholder="name" name="nameUser" value="Rodrigo">
+  </label>
+  <label for="emailUser">
+    <input type="email" placeholder="Email" name="emailUser" value="r@js.com">
+  </label>
+  <button>Send</button>
+</form>
+<h2>Other</h2>
+<form action="http://127.0.0.1:1024/normalform" method="post" >
+  <label for="nameUser">
+    <input type="text" placeholder="name" name="nameUser" value="Rodrigo">
+  </label>
+  <label for="emailUser">
+    <input type="email" placeholder="Email" name="emailUser" value="r@js.com">
+  </label>
+  <button>Send</button>
+</form>
+<script>
+  let form = document.querySelector( '#formD' ),
+      flag = false
+
+  if( flag ){
+    form.addEventListener( 'submit', async e => {
+      e.preventDefault()
+      const data = await fetch( 'http://127.0.0.1:1024/tours/all', {
+        method: 'GET'
+      })
+      .then( raw => raw.json() )
+      .catch( err => {
+        throw new Error( err );
+        console.log( 'Error', err )
+      })
+      console.log( data )
+    })
+  }
+
+  form.addEventListener( 'submit', async e => {
+      e.preventDefault()
+      console.log( e, new FormData( formD ) )
+      const data = await fetch( 'http://127.0.0.1:1024/tours/post/', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          body: JSON.stringify( { nameUser: 'Rod', search: ':d' } )
+        },
+      })
+      .then( raw => raw.json() )
+      .catch( err => {
+        console.log( 'Error', err )
+        throw new Error( err );
+      })
+      console.log( data )
+    })
+
+</script>
