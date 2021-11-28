@@ -2,7 +2,8 @@ const express = require( 'express' ),
       app     = express(),
       hand    = require( 'express-handlebars' ),
       port    = process.env.PORT || 3000,
-      bp      = require( 'body-parser' )
+      multer  = require( 'multer' ),
+      upload  = multer()
 
 //  Security
 app.disable( 'x-powered-by' )
@@ -11,19 +12,17 @@ app.engine( 'handlebars', hand({
   defaultLayout: 'main'
 }))
 app.set( 'view engine', 'handlebars' )
-// Body parser urlEncoded
-app.use( bp.urlencoded({ extended: false }))
 // Request Pages
 app.get( '/', ( req, res ) => res.render( 'home' ) )
 app.get( '/form', ( req, res ) => res.render( 'form' ) )
 app.get( '/thank-you', ( req, res ) => res.status( 303 ).render( 'thank-you') )
 // Reques Post
-app.post( '/form_data', ( req, res ) => {
+app.post( '/form_data', upload.none() ,( req, res ) => {
   console.log( req.body, req.xhr )
   res.redirect( 303, 'thank-you' )
 })
 
-app.post( '/form_data_robust', ( req, res ) => {
+app.post( '/form_data_robust', upload.none() ,( req, res ) => {
   try{
     if( req.body.simulateError ){
       throw new Error( 'Error' )

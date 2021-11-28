@@ -66,8 +66,6 @@
   form3.addEventListener( 'submit', e => {
     e.preventDefault()
     const data = new FormData( form3 )
-    data.append( 'userName', form3.userName.value )
-    data.append( 'age', form3.age.value )
     console.log( data )
     fetch( 'http://127.0.0.1:1024/api/user/1', {
       method: 'PUT',

@@ -24,9 +24,9 @@ const tours = [
 app.disable( 'x-powered-by' )
 
 // body parser
-app.use( bp.json() ) 
-app.use( bp.urlencoded() )
-app.use( bp.urlencoded({ extended: true })) 
+// app.use( bp.json() ) 
+// app.use( bp.urlencoded() )
+// app.use( bp.urlencoded({ extended: true })) 
 
 // Engine
 app.engine( 'handlebars', hand({
@@ -78,7 +78,9 @@ app.put( '/api/user/:id', upload.none() ,( req, res ) => {
   if( !find ) return res.status( 404 ).json({ 
     success: false, error: 'No suchas user in the database'
   })
-
+  console.log( find )
+  if( req.body.userName ) find.userName = req.body.userName
+  if( req.body.age ) find.age = parseInt( req.body.age )
   console.log( find )
   res.json({ success: true })
 })
