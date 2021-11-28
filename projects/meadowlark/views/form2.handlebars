@@ -19,9 +19,16 @@
   </label>
   <button>Send</button>
 </form>
+<h3>Put</h3>
+<form action="http://127.0.0.1:1024/api/user/id" method="put" id="test_put">
+  <input type="text" placeholder="name" value="Rodrigo Ivan" name="userName" />
+  <input type="text" placeholder="age" value="28" name="age" />
+  <button type="submit" >Send></button>
+</form>
 <script>
-  let form = document.querySelector( '#formD' ),
-      flag = false
+  let form  = document.querySelector( '#formD' ),
+      flag  = false,
+      form3  = document.querySelector( '#test_put')
 
   if( flag ){
     form.addEventListener( 'submit', async e => {
@@ -55,5 +62,23 @@
       })
       console.log( data )
     })
+  
+  form3.addEventListener( 'submit', e => {
+    e.preventDefault()
+    const data = new FormData( form3 )
+    data.append( 'userName', form3.userName.value )
+    data.append( 'age', form3.age.value )
+    console.log( data )
+    fetch( 'http://127.0.0.1:1024/api/user/1', {
+      method: 'PUT',
+      body: data
+    })
+    .then( raw => raw.json() )
+    .catch( err => {
+      console.log( err )
+      throw new Error( err )
+    })
+    .finally( e => console.log( 'end' ) )
+  })
 
 </script>
