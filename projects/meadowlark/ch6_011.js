@@ -85,5 +85,24 @@ app.put( '/api/user/:id', upload.none() ,( req, res ) => {
   res.json({ success: true })
 })
 
+// Delete
+
+app.delete( '/api/users/:id', upload.none() ,( req, res ) => {
+  console.log( req.body, req.params )
+  const user = Users.findIndex( user => ( 
+    user.id === parseInt( req.params.id ) ) )
+  console.log( user )
+  if( user > 0 ){
+    Users.splice( user, 1 )
+    res.json({
+      success: true
+    })
+  }else{
+    res.json({
+      error: 'There arent any user with that ID',
+      success: false
+    })
+  }
+})
 // Listen
 app.listen( port, console.log( `http://127.0.0.1:${ port }` ) )

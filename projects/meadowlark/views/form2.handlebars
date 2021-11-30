@@ -25,10 +25,23 @@
   <input type="text" placeholder="age" value="28" name="age" />
   <button type="submit" >Send></button>
 </form>
+<h3>Delete</h3>
+<form action="" method="post" enctype="multipart/form-data" id="form4">
+  <input type="text" name="userName" value="Jesse" placeholder="User Name">
+  <input type="text" name="userAge" value="12" placeholder="User Age">
+  <fieldset>
+    <label for="delete_check">
+      Delete User?
+      <input type="checkbox" id="delete_check" >
+    </label>
+  </fieldset>
+  <button>Click</button>
+</form>
 <script>
-  let form  = document.querySelector( '#formD' ),
-      flag  = false,
-      form3  = document.querySelector( '#test_put')
+  let form    = document.querySelector( '#formD' ),
+      flag    = false,
+      form3   = document.querySelector( '#test_put'),
+      form4   = document.querySelector( '#form4' )
 
   if( flag ){
     form.addEventListener( 'submit', async e => {
@@ -77,6 +90,20 @@
       throw new Error( err )
     })
     .finally( e => console.log( 'end' ) )
+  })
+
+  form4.addEventListener( 'submit', e => {
+    e.preventDefault()
+    fetch( 'http://127.0.0.1:1024/api/users/1', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then( raw => raw.json() )
+    .then( data => console.log( data) )
+    .catch( err => console.log( err ) )
+    .finally( () => console.log( 'end') )
   })
 
 </script>
