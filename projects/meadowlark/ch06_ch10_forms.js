@@ -5,6 +5,9 @@ const express = require( 'express' ),
       multer  = require( 'multer' ),
       upload  = multer()
 
+// Request JSON
+app.use( express.json() )
+app.use( express.urlencoded({ extended: true }))
 //  Security
 app.disable( 'x-powered-by' )
 // Adding engine handlebars
