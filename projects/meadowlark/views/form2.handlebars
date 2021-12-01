@@ -1,6 +1,6 @@
 <h2>Forms</h2>
-
-<form action="" method="post" id="formD">
+<h3>Form d</h3>
+<form action="" method="post" id="formD" enctype="multipart/form-data">
   <label for="nameUser">
     <input type="text" placeholder="name" name="nameUser" value="Rodrigo">
   </label>
@@ -65,8 +65,8 @@
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
-          body: JSON.stringify( { nameUser: 'Rod', search: ':d' } )
         },
+        body: JSON.stringify( { nameUser: 'Rod', search: ':d' } ),
       })
       .then( raw => raw.json() )
       .catch( err => {

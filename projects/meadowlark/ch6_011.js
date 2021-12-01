@@ -27,7 +27,8 @@ app.disable( 'x-powered-by' )
 // app.use( bp.json() ) 
 // app.use( bp.urlencoded() )
 // app.use( bp.urlencoded({ extended: true })) 
-
+app.use( express.json() )
+app.use( express.urlencoded({ extended: true }))
 // Engine
 app.engine( 'handlebars', hand({
   defaultLayout: 'main'
@@ -49,7 +50,7 @@ app.get( '/tours/all/', ( req, res ) => {
   // res.format({ 'application/json': res.json( tours ) })
 })
 
-app.post( '/tours/post/', ( req, res ) => {
+app.post( '/tours/post/', upload.none(),( req, res ) => {
   console.log(
     req.params,
     req.body,
