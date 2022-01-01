@@ -25,7 +25,17 @@ app.get( '/pass', ( req, res ) => res.render( 'passhtml', {
       { place:'USA', price: 30 }, 
       { place: 'New Zeland', price: 60 }
     ]
-  }
+  },
+  currency2: {
+    name: 'United States Dollars',
+    abbrev: 'USD'
+  },
+  tours: [
+    { name: 'Hood River', price: '$99.95' },
+    { name: 'Oregon Coast', price: '$159.95' }
+  ],
+  specialUrl: '/january-specials',
+  currencies: [ 'USD', 'BTC', 'GBP' ]
 } ))
 
 app.use( ( req, res ) => res.status( 404 ).render('404'))

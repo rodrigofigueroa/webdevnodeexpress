@@ -1,10 +1,43 @@
 <h2>My name is {{ nameUser }}</h2>
 {{{ pUpper }}}
-<p>
-  if 
-</p>
+
 {{! COmment }}
 
 {{#if currency }}
   <h2>Cost of currencies</h2>
+  {{#each currency.places }}
+    <h2>Place: {{ place }}</h2>
+    <p>
+      price: {{ price }}
+    </p>
+  {{/each}}
 {{/if }}
+<h3>Tours</h3>
+<ul>
+  {{#each tours}}
+    <li>
+      {{ name }} - {{ price }}
+
+        {{#if ../currencies }}
+          {{ ../currency2.abbrev }}
+        {{/if }}
+    </li>
+  {{/each}}
+
+</ul>
+  {{#unless currencies }}
+    <h2>Unless</h2>
+    <p>{{ currency2.name }}</p>
+  {{/unless}}
+  {{#if specialUrl}}
+    {{! I'm in a new block}}
+    <a href="{{ specialUrl }}">Special</a>
+    {{else }}
+      <a href="/">Home</a>
+  {{/if}}
+<h2>Currencies</h2>
+{{#each currencies }}
+  <p>{{ . }}</p>
+  {{else}}
+  <p>Sorry</p>
+{{/each}}
