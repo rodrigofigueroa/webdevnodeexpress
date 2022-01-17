@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-12">
+        <h2>Insert your name and your Email for NewsLetter xD</h2>
+      </div>
+      <div class="col-12">
+        <form 
+          action="" 
+          method="POST"
+          role="form" 
+          id="signUpNewsLetterForm" >
+          <input type="hidden" name="_csrf" value="{{ csrf }}">
+          <div class="form-group">
+            <label for="nameId" class="form-label">Name</label>
+            <input type="text" name="nameId" id="nameId" class="form-control">
+          </div>
+          <div class="form-group mt-3">
+            <label for="emailId" class="form-label">Email</label>
+            <input type="text" name="emailId" id="emailId" class="form-control" required>
+          </div>
+          <button class="btn btn-primary mt-3">
+            Register
+          </button>
+        </form>
+      </div>
+      <div class="col-12">
+        <h2 id="responseFetch"></h2>
+      </div>
+    </div>
+  </div>
+  <script>
+    let form    = document.querySelector( '#signUpNewsLetterForm' ),
+        h2      = document.querySelector( '#responseFetch' ),
+        bd      = {},
+        headers = {
+          'Content-Type': 'application/json'
+        }
+        form.addEventListener( 'submit',  e => {
+          e.preventDefault()
+          new FormData( form )
+            .forEach( ( value, key ) => bd[ key ] = value )
+            
+          fetch( '/newsletter-signup/process', {
+              method: 'POST',
+              body: JSON.stringify( bd ), 
+              headers 
+            })
+          .then( res => {
+            if( res.status < 200 || res.status >= 300 ){
+              throw  new Error( 'There was a problem signing up to the News Letter' + res.status )
+            }
+              return res.json()
+          })
+          .then( data => {
+            h2.innerHTML = `${ data.success ? 'Cool you are in' : ':(' }`
+          })
+          .catch( err => {
+            h2.innerHTML = `${ err }`
+            console.log( new Error( err ))
+          })
+        })
+  </script>
+</body>
+</html>

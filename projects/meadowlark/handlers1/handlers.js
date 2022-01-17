@@ -14,4 +14,20 @@ exports.signUpProcess = ( req, res ) => {
   res.redirect( 303, '/signup-thankyou' )
 }
 
+exports.api = {
+  signUpStart: ( req, res ) => {
+    res.render( 'ch8/fetch', {
+      csrf: 'Toke is in here',
+      layout: null
+    })
+  },
+  signUpPost: ( req, res ) => {
+    console.log( req.query )
+    console.log( req.body._csrf )
+    console.log( req.body.nameId )
+    console.log( req.body.emailId )
+    res.json({ success: true })
+  }
+}
+
 exports.signUpThankPage = ( req, res ) => res.render( 'signup-thankyou' )
