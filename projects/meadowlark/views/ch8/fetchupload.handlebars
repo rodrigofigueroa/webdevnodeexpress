@@ -1,0 +1,51 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-5">
+      <form action="" id="formUpFetch">
+        <input type="hidden" name="_csrf" value="{{ csrf }}">
+        <div class="form-group mt-5">
+          <label for="userName">Name User</label>
+          <input type="text" name="userName" id="userName" class="form-control" placeholder="Utiliza tu Nombre" value="Princess Bubblegum">
+        </div>
+        <div class="form-group mt-3">
+          <label for="userEmail">Email</label>
+          <input type="email" name="userEmail" id="userEmail" class="form-control" placeholder="Utiliza tu Email" value="princess_bubblegum@adventuretime.com">
+        </div>
+        <div class="form-group mt-3">
+          <label for="userUpload">Add Any image that you want</label>
+          <input type="file" name="userUpload" id="userUpload" class="" accept="image/*">
+        </div>
+        <button type="submit" id="btnFetchUp" class="btn btn-primary mt-4">Send Image</button>
+      </form>
+      <div>
+        <h2 id="txtFetch"></h2>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.querySelector( '#formUpFetch' )
+    .addEventListener( 'submit', e => {
+      e.preventDefault()
+      const h       = document.querySelector( '#txtFetch' )
+      // if you use JSON you need to specify headers
+      
+      fetch( `/fetchupload/{{ year }}/{{ month }}`, {
+        method: 'POST',
+        body: new FormData( e.target )
+      })
+      .then( raw => {
+        if( raw.status < 200 || raw.status >= 300 ) 
+        h.textContent = `There was a proble uploading the image: ${ raw.status }` 
+        return raw.json()
+      })
+      .then( data => {
+        h.textContent = `The upload process is ${ data.success }`
+      })
+      .catch( err => {
+        console.log( new Error( err ) )
+        h.textContent = `There was an error uploading ${ err }`
+      })
+  })
+</script>
