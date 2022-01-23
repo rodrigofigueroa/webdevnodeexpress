@@ -6,8 +6,9 @@ const express     = require( 'express' ),
       {
         uploadViews,
         api
-      } = require( './handlers1/handlers3' )
-  
+      } = require( './handlers1/handlers3' ),
+      credencials = require('./config')
+console.log( credencials )
 app.disable( 'x-powered-by' )
 app.use( express.urlencoded({ extended: false }))
 app.use( express.json() )
