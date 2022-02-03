@@ -5,15 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon ch9/meadowlark.js"
+    "start": "nodemon ch9/meadowlark.js",
+    "start2": "nodemon -r esm ch9/meadowlark2.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cookie-parser": "^1.4.6",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.3",
+    "express-session": "^1.17.2",
     "multer": "^1.4.3",
     "multiparty": "^4.2.2",
     "nodemon": "^2.0.15"
