@@ -1,0 +1,12 @@
+{{#if flash}}
+  <div class="alert alert-dismissible" alert- {{flash-type}}>
+    <h2>Start</h2>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+      &time;
+    </button>
+    <strong>{{ flash.intro }}</strong>
+    <p>
+      {{{ flash.message }}}
+    </p>
+  </div>
+{{/if}}
